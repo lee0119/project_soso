@@ -1,0 +1,12 @@
+cloud:
+  aws:
+    s3:
+      bucket: postblog-bucket
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+    credentials:
+      instanceProfile: true
+      access-key: AKIAVPO4JKBAZJIX5RPT
+      secret-key: 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
