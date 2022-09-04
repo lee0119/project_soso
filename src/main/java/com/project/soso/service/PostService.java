@@ -1,30 +1,30 @@
 package com.project.soso.service;
 
 
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.project.soso.dto.PostRequestDto;
 import com.project.soso.dto.PostResponseDto;
 import com.project.soso.entity.Post;
 import com.project.soso.entity.S3Uploader;
-import com.project.soso.entity.UploadImage;
-import com.project.soso.repository.ImageRepository;
 import com.project.soso.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.awt.*;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class PostService {
 
     private final PostRepository postRepository;
-    private final ImageRepository imageRepository;
     private final S3Uploader s3Uploader;
+
 
     // 전체 목록 조회 처리
     @Transactional
@@ -45,10 +45,16 @@ public class PostService {
     public PostResponseDto createPost(PostRequestDto postRequestDto, MultipartFile multipartFile) throws IOException {
 
         String imgUrl = s3Uploader.upload(multipartFile, "soso");
+        String fileName;
+        if(imgUrl == null) {
+            fileName = null;
+        } else {
+            fileName = imgUrl.substring(imgUrl.indexOf("soso"));
+        }
 
         Post post = Post.builder()
                 .title(postRequestDto.getTitle())
-                .nickname(postRequestDto.getNickname())
+                .fileName(fileName)
                 .imgUrl(imgUrl)
                 .build();
         postRepository.save(post);
@@ -56,7 +62,6 @@ public class PostService {
         return PostResponseDto.builder()
                 .id(post.getId())
                 .title(post.getTitle())
-                .nickname(post.getNickname())
                 .imgUrl(post.getImgUrl())
                 .createdAt(post.getCreatedAt())
                 .modifiedAt(post.getModifiedAt())
@@ -76,7 +81,6 @@ public class PostService {
         return PostResponseDto.builder()
                 .id(post.getId())
                 .title(post.getTitle())
-                .nickname(post.getNickname())
                 .imgUrl(post.getImgUrl())
                 .modifiedAt(post.getModifiedAt())
                 .build();
@@ -89,12 +93,23 @@ public class PostService {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
 
-        String temp = post.getImgUrl();
-        UploadImage uploadImage = imageRepository.findByImgUrl(temp);
-        String filename = uploadImage.getFilename();
-        s3Uploader.deleteImage(filename);
+        if(post.getImgUrl() != null) {
+            final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion("ap-northeast-2").build();
+            try {
+                s3.deleteObject("postblog-bucket", post.getFileName());
 
-        return null;
+            } catch (AmazonServiceException e) {
+                System.err.println(e.getErrorMessage());
+                System.exit(1);
+            }
+
+            System.out.println("Done!");
+        }
+        postRepository.delete(post);
+
+        return PostResponseDto.builder()
+                .id(post.getId())
+                .imgUrl(post.getImgUrl())
+                .build();
     }
-
 }

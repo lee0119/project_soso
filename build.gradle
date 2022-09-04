@@ -33,6 +33,9 @@ dependencies {
     // AWS S3 이미지 업로드를 위한 디펜던시
     implementation platform('com.amazonaws:aws-java-sdk-bom:1.12.290')
     implementation 'com.amazonaws:aws-java-sdk-s3'
+
+    // Tika (이미지 파일만 업로드 할 수 있게 확장자 구별)
+    implementation group: 'org.apache.tika', name: 'tika-core', version: '1.24.1'
 }
 
 tasks.named('test') {

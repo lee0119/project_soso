@@ -5,8 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
+import java.awt.*;
+import java.util.List;
 
 
 @Builder
@@ -23,25 +24,25 @@ public class Post extends Timestamped {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
-    private String nickname;
-
-    @Column(nullable = false)
+    @Column
     private String imgUrl;
+
+    @Column
+    private String fileName;
 
 
 
     public Post(PostRequestDto postRequestDto) {
         this.title = postRequestDto.getTitle();
-        this.nickname = postRequestDto.getNickname();
         this.imgUrl = postRequestDto.getImgUrl();
+        this.fileName = postRequestDto.getFileName();
     }
 
 
     public void update(PostRequestDto postRequestDto) {
         this.title = postRequestDto.getTitle();
-        this.nickname = postRequestDto.getNickname();
         this.imgUrl = postRequestDto.getImgUrl();
+        this.fileName = postRequestDto.getFileName();
     }
 
 }

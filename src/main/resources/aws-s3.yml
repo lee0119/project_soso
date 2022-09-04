@@ -8,5 +8,5 @@ cloud:
       auto: false
     credentials:
       instanceProfile: true
-      access-key: AKIAVPO4JKBAZJIX5RPT
-      secret-key: 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
+      access-key: AKIAVPO4JKBA3HE2IRUB
+      secret-key: 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

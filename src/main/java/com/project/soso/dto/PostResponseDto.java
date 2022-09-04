@@ -15,7 +15,6 @@ public class PostResponseDto {
 
     private Long id;
     private String title;
-    private String nickname;
     private String imgUrl;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;

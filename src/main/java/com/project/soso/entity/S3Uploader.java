@@ -7,6 +7,7 @@ import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 
+
 @Slf4j
 @RequiredArgsConstructor
 @Component
@@ -23,15 +25,18 @@ public class S3Uploader {
 
     private final AmazonS3Client amazonS3Client;
 
-    @Value("{cloud.aws.s3.bucket")
+    @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
 
     // 1. MultipartFile을 전달받아 File로 전환한 후에 S3에 업로드
     public String upload(MultipartFile multipartFile, String dirName) throws IOException {
+        if(!multipartFile.isEmpty()) {
+            isImage(multipartFile);
+        } else return null;
 
         File uploadFile = convert(multipartFile)
-                .orElseThrow(() -> new IllegalArgumentException("파일 전환에 실패하였습니다"));
+                .orElseThrow(() -> new IllegalArgumentException("파일 변환에 실패하였습니다."));
 
         return upload(uploadFile, dirName);
     }
@@ -54,11 +59,11 @@ public class S3Uploader {
     //      FileOutputStream : 데이터를 바이트스트림으로 저장하는 객체(파일 주고받을 때 바이트스트림 사용)
     private Optional<File> convert(MultipartFile file) throws IOException {
         File convertFile = new File(System.getProperty("user.dir") + "/" + file.getOriginalFilename());
-        if(convertFile.createNewFile()) {
-            try(FileOutputStream fos = new FileOutputStream(convertFile)) {
+        if (convertFile.createNewFile()) {
+            try (FileOutputStream fos = new FileOutputStream(convertFile)) {
                 fos.write(file.getBytes());
 
-            }   return Optional.of(convertFile);
+            } return Optional.of(convertFile);
 
         } return Optional.empty();
     }
@@ -83,9 +88,18 @@ public class S3Uploader {
     }
 
 
-    // 업로드 파일 지우기
-    public void deleteImage(String fileName) {
-        amazonS3Client.deleteObject(new DeleteObjectRequest(bucket, fileName));
+    // 이미지 파일인지 확인하는 메소드
+    private void isImage(MultipartFile multipartFile) throws IOException {
+
+        // tika를 이용해 파일 MIME 타입 체크
+        // 파일명에 .jpg 식으로 붙는 확장자는 없앨 수도 있고 조작도 가능하므로 MIME 타입을 체크하는 것이 좋다.
+        Tika tika = new Tika();
+        String mimeType = tika.detect(multipartFile.getInputStream());
+
+        // MIME타입이 이미지가 아니면 exception 발생
+        if (!mimeType.startsWith("image/")) {
+            throw new IllegalStateException("이미지 파일이 아닙니다");
+        }
     }
 
 }
