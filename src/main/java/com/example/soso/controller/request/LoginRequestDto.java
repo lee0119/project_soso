@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 public class LoginRequestDto {
 
     @NotBlank// null값과 빈 공백 문자열을 허용하지 않는 어노테이션
-    private String nickname; //로그인 아이디
+    private String username; //로그인 아이디
 
     @NotBlank// null값과 빈 공백 문자열을 허용하지 않는 어노테이션
     private String password; //로그인 비밀번호

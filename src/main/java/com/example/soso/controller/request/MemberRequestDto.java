@@ -16,7 +16,12 @@ public class MemberRequestDto {
     @NotBlank // null값과 빈 공백 문자열을 허용하지 않는 어노테이션
     @Size(min = 4, max = 12) // 문자열의 길이를 적용하는 어노테이션
     @Pattern(regexp = "[a-zA-Z\\d]*${3,12}") // 문자 정규식을 지정하는 어노테이션
-    private String nickname; //회원가입 아이디
+    private String username; //회원가입 아이디
+
+    @NotBlank
+    @Size(min = 2, max = 6)
+    @Pattern(regexp = "[a-zA-Z\\d]*${3,12}")
+    private String nickname;
 
     @NotBlank// null값과 빈 공백 문자열을 허용하지 않는 어노테이션
     @Size(min = 4, max = 32)// 문자열의 길이를 적용하는 어노테이션
