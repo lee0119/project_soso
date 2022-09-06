@@ -43,7 +43,7 @@ public class PostController {
 
     // 게시글 수정
     @CrossOrigin
-    @PatchMapping(value = "/api/auth/post/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PatchMapping(value = "/api/auth/post/{id}")
     public PostResponseDto updatePost(@PathVariable Long id, @RequestPart(value = "title") PostRequestDto postRequestDto, @RequestPart(value = "imageUrl", required = false) MultipartFile multipartFile) throws IOException {
         return postService.updatePost(id, postRequestDto, multipartFile);
     }
