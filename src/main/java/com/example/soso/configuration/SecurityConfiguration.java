@@ -64,7 +64,8 @@ public class SecurityConfiguration {
                 .antMatchers("/api/subComment/**").permitAll()
                 .antMatchers("/api/auth/image").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**/*").permitAll()
-
+                .antMatchers("http://localhost:3000").permitAll()
+                .antMatchers("http://localhost:3001").permitAll()
 //                .antMatchers("/api/member/**").permitAll()
 
 
