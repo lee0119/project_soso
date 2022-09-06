@@ -40,6 +40,7 @@ public class MemberService {
 
         Member member = Member.builder()
                 .username(requestDto.getUsername())
+//                .username(requestDto.getNickname())
                 .password(passwordEncoder.encode(requestDto.getPassword()))
                 .build();
         memberRepository.save(member);
@@ -60,6 +61,7 @@ public class MemberService {
             return ResponseDto.fail("MEMBER_NOT_FOUND",
                     "사용자를 찾을 수 없습니다.");
         }
+
 
         if (!member.validatePassword(passwordEncoder, requestDto.getPassword())) {
             return ResponseDto.fail("INVALID_MEMBER", "사용자를 찾을 수 없습니다.");
@@ -98,6 +100,11 @@ public class MemberService {
         Optional<Member> optionalMember = memberRepository.findByUsername(username);
         return optionalMember.orElse(null);
     }
+//    @Transactional(readOnly = true)
+//    public Member isPresentMember(String nickname) {
+//        Optional<Member> optionalMember = memberRepository.findByUsername(nic);
+//        return optionalMember.orElse(null);
+//    }
 
     public void tokenToHeaders(TokenDto tokenDto, HttpServletResponse response) {
         response.addHeader("Authorization", "Bearer " + tokenDto.getAccessToken());
