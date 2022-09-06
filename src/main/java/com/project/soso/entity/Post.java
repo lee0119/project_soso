@@ -25,7 +25,7 @@ public class Post extends Timestamped {
     private String title;
 
     @Column
-    private String imgUrl;
+    private String imageUrl;
 
     @Column
     private String fileName;
@@ -34,14 +34,14 @@ public class Post extends Timestamped {
 
     public Post(PostRequestDto postRequestDto) {
         this.title = postRequestDto.getTitle();
-        this.imgUrl = postRequestDto.getImgUrl();
+        this.imageUrl = postRequestDto.getImageUrl();
         this.fileName = postRequestDto.getFileName();
     }
 
 
     public void update(PostRequestDto postRequestDto) {
         this.title = postRequestDto.getTitle();
-        this.imgUrl = postRequestDto.getImgUrl();
+        this.imageUrl = postRequestDto.getImageUrl();
         this.fileName = postRequestDto.getFileName();
     }
 

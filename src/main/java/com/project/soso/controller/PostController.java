@@ -24,25 +24,30 @@ public class PostController {
         return postService.getAllPosts();
     }
 
+
     // 게시글 상세 페이지
     @GetMapping("/api/auth/post/{id}")
     public Post getPost(@PathVariable Long id) {
         return postService.getPost(id);
     }
 
+
     // 게시글 등록
+    // consumes = 클라이언트에게 받을 mediatype를 입력된 내용으로만 제한함
+    // requestpart의 value값은 프론트엔드와 맞춰야 입력값이 제대로 들어옴
     @PostMapping(value = "/api/auth/post", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public PostResponseDto createPost(@RequestPart PostRequestDto postRequestDto, @RequestPart(required = false) MultipartFile multipartFile) throws IOException {
-
+    public PostResponseDto createPost(@RequestPart(value = "title") PostRequestDto postRequestDto, @RequestPart(value = "imageUrl", required = false) MultipartFile multipartFile) throws IOException {
         return postService.createPost(postRequestDto, multipartFile);
-
     }
+
 
     // 게시글 수정
-    @PutMapping(value = "/api/auth/post/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public PostResponseDto updatePost(@PathVariable Long id, @RequestPart PostRequestDto postRequestDto, @RequestPart(required = false) MultipartFile multipartFile) throws IOException {
+    @CrossOrigin
+    @PatchMapping(value = "/api/auth/post/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    public PostResponseDto updatePost(@PathVariable Long id, @RequestPart(value = "title") PostRequestDto postRequestDto, @RequestPart(value = "imageUrl", required = false) MultipartFile multipartFile) throws IOException {
         return postService.updatePost(id, postRequestDto, multipartFile);
     }
+
 
     // 게시글 삭제
     @DeleteMapping("/api/auth/post/{id}")

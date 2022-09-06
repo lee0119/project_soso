@@ -31,9 +31,8 @@ public class S3Uploader {
 
     // 1. MultipartFile을 전달받아 File로 전환한 후에 S3에 업로드
     public String upload(MultipartFile multipartFile, String dirName) throws IOException {
-        if(!multipartFile.isEmpty()) {
-            isImage(multipartFile);
-        } else return null;
+        // 업로드 되는 파일이 이미지 파일인지 여부 검증
+        isImage(multipartFile);
 
         File uploadFile = convert(multipartFile)
                 .orElseThrow(() -> new IllegalArgumentException("파일 변환에 실패하였습니다."));
