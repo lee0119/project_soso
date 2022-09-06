@@ -107,7 +107,7 @@ public class PostService {
                 .id(post.getId())
                 .title(post.getTitle())
                 .imageUrl(post.getImageUrl())
-                .modifiedAt(post.getModifiedAt())
+//                .modifiedAt(post.getModifiedAt())
                 .build();
     }
 
