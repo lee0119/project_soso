@@ -1,6 +1,6 @@
 package com.example.soso.jwt;
 
-import com.example.soso.controller.response.ResponseDto;
+import com.example.soso.dto.response.ResponseDto;
 import com.example.soso.service.UserDetailsServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;

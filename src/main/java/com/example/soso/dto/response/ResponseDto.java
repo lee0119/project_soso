@@ -1,4 +1,4 @@
-package com.example.soso.controller.response;
+package com.example.soso.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

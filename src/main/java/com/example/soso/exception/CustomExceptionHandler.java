@@ -1,6 +1,6 @@
-package com.example.soso.controller;
+package com.example.soso.exception;
 
-import com.example.soso.controller.response.ResponseDto;
+import com.example.soso.dto.response.ResponseDto;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

@@ -65,6 +65,9 @@ public class SecurityConfiguration {
                 .antMatchers("/api/auth/image").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**/*").permitAll()
 
+//                .antMatchers("/api/member/**").permitAll()
+
+
                 .anyRequest().authenticated()
 
                 .and()

@@ -1,6 +1,5 @@
-package com.example.soso.controller.request;
+package com.example.soso.dto.request;
 
-import com.example.soso.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

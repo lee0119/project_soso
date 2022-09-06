@@ -1,10 +1,10 @@
 package com.example.soso.service;
 
-import com.example.soso.controller.request.LoginRequestDto;
-import com.example.soso.controller.request.MemberRequestDto;
-import com.example.soso.controller.request.TokenDto;
-import com.example.soso.controller.response.MemberResponseDto;
-import com.example.soso.controller.response.ResponseDto;
+import com.example.soso.dto.request.LoginRequestDto;
+import com.example.soso.dto.request.MemberRequestDto;
+import com.example.soso.dto.request.TokenDto;
+import com.example.soso.dto.response.MemberResponseDto;
+import com.example.soso.dto.response.ResponseDto;
 import com.example.soso.domain.Member;
 import com.example.soso.jwt.TokenProvider;
 import com.example.soso.repository.MemberRepository;
