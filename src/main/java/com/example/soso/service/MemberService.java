@@ -40,7 +40,7 @@ public class MemberService {
 
         Member member = Member.builder()
                 .username(requestDto.getUsername())
-//                .username(requestDto.getNickname())
+                .nickname(requestDto.getNickname())
                 .password(passwordEncoder.encode(requestDto.getPassword()))
                 .build();
         memberRepository.save(member);
@@ -48,6 +48,7 @@ public class MemberService {
                 MemberResponseDto.builder()
                         .id(member.getId())
                         .username(member.getUsername())
+                        .nickname(member.getNickname())
                         .createdAt(member.getCreatedAt())
                         .modifiedAt(member.getModifiedAt())
                         .build()
@@ -75,6 +76,7 @@ public class MemberService {
                 MemberResponseDto.builder()
                         .id(member.getId())
                         .username(member.getUsername())
+                        .nickname(member.getNickname())
                         .createdAt(member.getCreatedAt())
                         .modifiedAt(member.getModifiedAt())
                         .build()
