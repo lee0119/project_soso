@@ -1,36 +1,51 @@
 package com.example.soso.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Objects;
 
-@Builder
+@Entity
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Builder
 public class Member extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String username;
+    @Column(nullable = false, unique = true)
+    private String username; //email 형식인 username
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nickname;
 
     @Column(nullable = false)
-    @JsonIgnore //데이터를 주고 받을때 결과값을 응답값에 보이지 않음
     private String password;
+
+
+    public Member(String username, String nickname, String password) {
+        this.username = username;
+        this.nickname = nickname;
+        this.password = password;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+
+    public boolean validatePassword(PasswordEncoder passwordEncoder, String password) {
+        return passwordEncoder.matches(password, this.password);
+
+
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -43,13 +58,5 @@ public class Member extends Timestamped {
         Member member = (Member) o;
         return id != null && Objects.equals(id, member.id);
     }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
-
-    public boolean validatePassword(PasswordEncoder passwordEncoder, String password) {
-        return passwordEncoder.matches(password, this.password);
-    }
 }
+

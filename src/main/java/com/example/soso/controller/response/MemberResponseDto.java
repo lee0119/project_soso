@@ -18,7 +18,7 @@ public class MemberResponseDto {
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
-    public MemberResponseDto( String nickname) {
-        this.nickname = nickname;
-    }
+//    public MemberResponseDto( String nickname) {
+//        this.nickname = nickname;
+//    }
 }
