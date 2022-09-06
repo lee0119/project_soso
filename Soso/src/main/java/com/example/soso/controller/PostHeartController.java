@@ -1,6 +1,8 @@
 package com.example.soso.controller;
 
 
+import com.example.soso.controller.request.PostHeartDto;
+import com.example.soso.service.PostHeartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
