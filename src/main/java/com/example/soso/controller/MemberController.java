@@ -34,7 +34,7 @@ public class MemberController {
 //    return memberService.reissue(request, response);
 //  }
 
-    @RequestMapping(value = "/api/auth/member/logout", method = RequestMethod.POST)
+    @PostMapping( "/api/auth/member/logout")
     public ResponseDto<?> logout(HttpServletRequest request) {
         return memberService.logout(request);
     }
