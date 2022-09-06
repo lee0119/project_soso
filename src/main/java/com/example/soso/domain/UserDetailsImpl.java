@@ -32,12 +32,11 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     @Override
-    public String getUsername() {return member.getUsername();
+    public String getUsername() {
+        return member.getUsername();
     }
-    @Override
-    public String getNickname() {
-        return member.getNickname();
-    }
+
+
 
     @Override
     public boolean isAccountNonExpired() {

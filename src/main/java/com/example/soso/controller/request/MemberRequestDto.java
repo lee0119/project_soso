@@ -20,7 +20,6 @@ public class MemberRequestDto {
 
     @NotBlank
     @Size(min = 2, max = 6)
-    @Pattern(regexp = "[a-zA-Z\\d]*${3,12}")
     private String nickname;
 
     @NotBlank// null값과 빈 공백 문자열을 허용하지 않는 어노테이션
