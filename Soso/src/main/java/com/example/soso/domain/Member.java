@@ -9,6 +9,7 @@ import org.hibernate.Hibernate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Builder
@@ -52,4 +53,11 @@ public class Member extends Timestamped {
     public boolean validatePassword(PasswordEncoder passwordEncoder, String password) {
         return passwordEncoder.matches(password, this.password);
     }
+
+    //PostHeart와 다대일 관계
+    @OneToMany(mappedBy = "member",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY)
+    private List<PostHeart> hearts;
 }
