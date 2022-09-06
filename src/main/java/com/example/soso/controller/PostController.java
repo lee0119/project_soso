@@ -2,7 +2,7 @@ package com.example.soso.controller;
 
 import com.example.soso.dto.PostRequestDto;
 import com.example.soso.dto.PostResponseDto;
-import com.example.soso.entity.Post;
+import com.example.soso.domain.Post;
 import com.example.soso.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

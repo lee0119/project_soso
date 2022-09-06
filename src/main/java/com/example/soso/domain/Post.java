@@ -1,4 +1,4 @@
-package com.example.soso.entity;
+package com.example.soso.domain;
 
 import com.example.soso.dto.PostRequestDto;
 import lombok.AllArgsConstructor;

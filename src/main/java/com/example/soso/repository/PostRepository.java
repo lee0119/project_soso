@@ -1,6 +1,6 @@
 package com.example.soso.repository;
 
-import com.example.soso.entity.Post;
+import com.example.soso.domain.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;

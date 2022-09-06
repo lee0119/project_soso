@@ -1,4 +1,4 @@
-package com.example.soso.config;
+package com.example.soso.configuration;
 
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
