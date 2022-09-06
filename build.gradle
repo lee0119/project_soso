@@ -1,10 +1,19 @@
 plugins {
+<<<<<<< HEAD
     id 'org.springframework.boot' version '2.7.3'
     id 'io.spring.dependency-management' version '1.0.13.RELEASE'
     id 'java'
 }
 
 group = 'com.project'
+=======
+    id 'org.springframework.boot' version '2.7.2'
+    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+    id 'java'
+}
+
+group = 'com.example'
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
@@ -20,6 +29,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+<<<<<<< HEAD
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -29,6 +39,26 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+=======
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'mysql:mysql-connector-java'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+    implementation 'mysql:mysql-connector-java'
+
+    implementation group: 'io.awspring.cloud', name: 'spring-cloud-starter-aws', version: '2.4.2'
+
+//     JWT
+    compileOnly group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
+
+//     validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354
 
     // AWS S3 이미지 업로드를 위한 디펜던시
     implementation platform('com.amazonaws:aws-java-sdk-bom:1.12.290')
@@ -37,6 +67,7 @@ dependencies {
     // Tika (이미지 파일만 업로드 할 수 있게 확장자 구별)
     implementation group: 'org.apache.tika', name: 'tika-core', version: '1.24.1'
 
+<<<<<<< HEAD
     // JWT
     compileOnly group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
@@ -44,6 +75,8 @@ dependencies {
 
     // validation
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.2'
+=======
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354
 }
 
 tasks.named('test') {

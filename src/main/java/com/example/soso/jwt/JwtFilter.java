@@ -1,6 +1,11 @@
 package com.example.soso.jwt;
 
+<<<<<<< HEAD
 import com.example.soso.controller.response.ResponseDto;
+=======
+import com.example.soso.dto.response.ResponseDto;
+import com.example.soso.service.UserDetailsServiceImpl;
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -88,4 +93,8 @@ public class JwtFilter extends OncePerRequestFilter {
         return null;
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354

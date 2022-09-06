@@ -1,5 +1,6 @@
 package com.example.soso.service;
 
+<<<<<<< HEAD
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
@@ -8,6 +9,15 @@ import com.example.soso.dto.PostRequestDto;
 import com.example.soso.dto.PostResponseDto;
 import com.example.soso.domain.Post;
 import com.example.soso.domain.S3Uploader;
+=======
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.example.soso.dto.request.PostRequestDto;
+import com.example.soso.domain.Post;
+import com.example.soso.domain.S3Uploader;
+import com.example.soso.dto.response.PostResponseDto;
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354
 import com.example.soso.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -74,9 +84,15 @@ public class PostService {
     // 게시글 수정 처리
     @Transactional
     public PostResponseDto updatePost(Long id, PostRequestDto postRequestDto, MultipartFile multipartFile) throws IOException {
+<<<<<<< HEAD
         
         Post post = postRepository.findById(id)
                         .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
+=======
+
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354
 
         String imageUrl;
         String fileName;
@@ -89,7 +105,11 @@ public class PostService {
             // 기존에 이미지 파일이 존재하는 경우, 기존 이미지 파일 삭제
             if(post.getImageUrl() != null) {
                 final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion("ap-northeast-2").build();
+<<<<<<< HEAD
                     s3.deleteObject("postblog-bucket", post.getFileName());
+=======
+                s3.deleteObject("postblog-bucket", post.getFileName());
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354
             }
 
             imageUrl = s3Uploader.upload(multipartFile, "soso");
@@ -108,7 +128,11 @@ public class PostService {
                 .id(post.getId())
                 .title(post.getTitle())
                 .imageUrl(post.getImageUrl())
+<<<<<<< HEAD
                 .modifiedAt(post.getModifiedAt())
+=======
+//                .modifiedAt(post.getModifiedAt())
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354
                 .build();
     }
 
@@ -136,4 +160,8 @@ public class PostService {
 
         return null;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354

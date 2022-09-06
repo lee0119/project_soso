@@ -2,6 +2,10 @@ package com.example.soso.configuration;
 
 import com.example.soso.jwt.JwtFilter;
 import com.example.soso.jwt.TokenProvider;
+<<<<<<< HEAD
+=======
+import com.example.soso.service.UserDetailsServiceImpl;
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,4 +25,8 @@ public class JwtSecurityConfiguration
         JwtFilter customJwtFilter = new JwtFilter(SECRET_KEY, tokenProvider, userDetailsService);
         httpSecurity.addFilterBefore(customJwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354

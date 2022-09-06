@@ -1,6 +1,10 @@
 package com.example.soso.jwt;
 
+<<<<<<< HEAD
 import com.example.soso.controller.response.ResponseDto;
+=======
+import com.example.soso.dto.response.ResponseDto;
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;

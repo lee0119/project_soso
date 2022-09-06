@@ -3,6 +3,10 @@ package com.example.soso.configuration;
 import com.example.soso.jwt.AccessDeniedHandlerException;
 import com.example.soso.jwt.AuthenticationEntryPointException;
 import com.example.soso.jwt.TokenProvider;
+<<<<<<< HEAD
+=======
+import com.example.soso.service.UserDetailsServiceImpl;
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -11,6 +15,10 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+<<<<<<< HEAD
+=======
+import org.springframework.http.HttpMethod;
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -44,6 +52,11 @@ public class SecurityConfiguration {
 
         http.csrf().disable()
 
+<<<<<<< HEAD
+=======
+                .headers().frameOptions().disable()
+                .and()
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPointException)
                 .accessDeniedHandler(accessDeniedHandlerException)
@@ -56,9 +69,22 @@ public class SecurityConfiguration {
                 .authorizeRequests()
                 .antMatchers("/api/member/**").permitAll()
                 .antMatchers("/api/post/**").permitAll()
+<<<<<<< HEAD
                 .antMatchers("/api/comment/**").permitAll()
                 .antMatchers("/api/subComment/**").permitAll()
                 .antMatchers("/api/auth/image").permitAll()
+=======
+                .antMatchers("/api/auth/post/**").permitAll()
+                .antMatchers("/api/comment/**").permitAll()
+                .antMatchers("/api/subComment/**").permitAll()
+//                .antMatchers("/api/auth/image").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/**/*").permitAll()
+                .antMatchers("http://localhost:3000").permitAll()
+                .antMatchers("http://localhost:3001").permitAll()
+//                .antMatchers("/api/member/**").permitAll()
+
+
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354
                 .anyRequest().authenticated()
 
                 .and()
@@ -66,4 +92,8 @@ public class SecurityConfiguration {
 
         return http.build();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 662a55560bc07d664388a66946b308995fba5354
