@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -28,6 +29,9 @@ public class Member extends Timestamped {
     @Column(nullable = false)
     @JsonIgnore
     private String password;
+
+    @OneToMany(mappedBy = "member")
+    private List<Comment> commentList;
 
     @Override
     public boolean equals(Object o) {

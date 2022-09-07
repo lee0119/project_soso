@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.List;
 
 
 @Builder
@@ -31,6 +32,24 @@ public class Post extends Timestamped {
     @JoinColumn(name = "member_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
+
+    //@ManyToOne 과 @OneToMany 로 양방향 관계
+    //CascadeType.REMOVE로 게시글이 삭제되면 댓글도 삭제
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OrderBy("id asc") // 댓글 정렬
+    private List<Comment> comments;
+
+
+    private Integer likeNum;
+
+    private Boolean isHeart = false;
+
+    public void like(){
+        this.likeNum +=1;
+    }
+    public void dislike(){
+        this.likeNum -=1;
+    }
 
 
     public Post(PostRequestDto postRequestDto) {
