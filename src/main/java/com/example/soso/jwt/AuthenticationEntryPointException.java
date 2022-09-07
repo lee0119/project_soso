@@ -1,15 +1,11 @@
 package com.example.soso.jwt;
 
-<<<<<<< HEAD
-import com.example.soso.controller.response.ResponseDto;
-=======
+
 import com.example.soso.dto.response.ResponseDto;
->>>>>>> 662a55560bc07d664388a66946b308995fba5354
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -21,16 +17,21 @@ public class AuthenticationEntryPointException implements
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
-        response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().println(
-                new ObjectMapper().writeValueAsString(
-                        ResponseDto.fail("BAD_REQUEST", "로그인이 필요합니다.")
-                )
-        );
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "unauthorized");
     }
-<<<<<<< HEAD
+
+
+//    @Override
+//    public void commence(HttpServletRequest request, HttpServletResponse response,
+//                         AuthenticationException authException) throws IOException {
+//        response.setContentType("application/json;charset=UTF-8");
+//        response.getWriter().println(
+//                new ObjectMapper().writeValueAsString(
+//                        ResponseDto.fail("BAD_REQUEST", "로그인이 필요합니다.")
+//                )
+//        );
+//        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//    }
 }
-=======
-}
->>>>>>> 662a55560bc07d664388a66946b308995fba5354
+

@@ -1,9 +1,5 @@
 package com.example.soso.domain;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 662a55560bc07d664388a66946b308995fba5354
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
@@ -103,8 +99,4 @@ public class S3Uploader {
         }
     }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 662a55560bc07d664388a66946b308995fba5354

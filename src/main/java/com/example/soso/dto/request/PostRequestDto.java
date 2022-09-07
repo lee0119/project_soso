@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class PostRequestDto {
 
     private String title;
+    private String nickName;
     private String imageUrl;
     private String fileName;
 

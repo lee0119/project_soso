@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 
 
 // AWS S3에 접근할 때, 어떤 IAM을 통해, 어떤 region을 통해 접근하는지 등을 설정해주는 곳
-
 @Configuration
 public class AmazonS3Config {
 
