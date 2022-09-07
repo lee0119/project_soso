@@ -37,3 +37,6 @@ out/
 .vscode/
 
 aws-s3.yml
+
+application-AWS.properties
+
