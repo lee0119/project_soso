@@ -20,6 +20,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -73,6 +76,7 @@ public class SecurityConfiguration {
                 .antMatchers("/api/auth/post/**").permitAll()
                 .antMatchers("/api/auth/comment/**").permitAll()
                 .antMatchers("/api/auth/subComment/**").permitAll()
+                .antMatchers("/api/auth/like/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -82,17 +86,22 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-    @Configuration
-    public static class CorsConfig implements WebMvcConfigurer {
-        @Override
-        public void addCorsMappings(CorsRegistry registry) {
-            registry.addMapping("/**")
-                    .allowedOrigins("*")
-                    .allowedHeaders("*")
-                    .allowedMethods("*")
-                    .maxAge(3000);
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
 
-        }
+        configuration.addAllowedOriginPattern("*");
+        configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
+        configuration.addExposedHeader("Authorization");
+        configuration.addExposedHeader("RefreshToken");
+        configuration.addExposedHeader("refreshToken");
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/api/**", configuration);
+        return source;
     }
 
 //    //Lucy Xss filter 적용

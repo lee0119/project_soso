@@ -22,6 +22,8 @@ public class Heart {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
+
+    @Builder.Default
     @Column
     private boolean flag =false;
 

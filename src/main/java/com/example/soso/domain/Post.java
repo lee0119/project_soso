@@ -42,6 +42,7 @@ public class Post extends Timestamped {
 
     private Integer likeNum;
 
+    @Builder.Default
     private Boolean isHeart = false;
 
     public void like(){

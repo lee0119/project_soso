@@ -88,7 +88,7 @@ public class MemberService {
 
     @Transactional
     public ResponseDto<?> reissue(HttpServletRequest request, HttpServletResponse response) {
-        if (!tokenProvider.validateToken(request.getHeader("Refresh-Token"))) {
+        if (!tokenProvider.validateToken(request.getHeader("RefreshToken"))) {
             return ResponseDto.fail("INVALID_TOKEN", "refresh token is invalid");
         }
         Member member = tokenProvider.getMemberFromAuthentication();
@@ -97,10 +97,10 @@ public class MemberService {
                     "member not found");
         }
 
-        Authentication authentication = tokenProvider.getAuthentication(request.getHeader("Access-Token"));
+        Authentication authentication = tokenProvider.getAuthentication(request.getHeader("Authorization"));
         RefreshToken refreshToken = tokenProvider.isPresentRefreshToken(member);
 
-        if (!refreshToken.getValue().equals(request.getHeader("Refresh-Token"))) {
+        if (!refreshToken.getRefreshToken().equals(request.getHeader("RefreshToken"))) {
             return ResponseDto.fail("INVALID_TOKEN", "refresh token is invalid");
         }
 
@@ -111,7 +111,7 @@ public class MemberService {
     }
 
     public ResponseDto<?> logout(HttpServletRequest request) {
-        if (!tokenProvider.validateToken(request.getHeader("Refresh-Token"))) {
+        if (!tokenProvider.validateToken(request.getHeader("RefreshToken"))) {
             return ResponseDto.fail("INVALID_TOKEN", "refresh token is invalid");
         }
         Member member = tokenProvider.getMemberFromAuthentication();
@@ -130,8 +130,8 @@ public class MemberService {
     }
 
     public void tokenToHeaders(TokenDto tokenDto, HttpServletResponse response) {
-        response.addHeader("Access-Token", "Bearer " + tokenDto.getAccessToken());
-        response.addHeader("Refresh-Token", "Bearer " + tokenDto.getRefreshToken());
+        response.addHeader("Authorization", "Bearer " + tokenDto.getAccessToken());
+        response.addHeader("RefreshToken", tokenDto.getRefreshToken());
         response.addHeader("Access-Token-Expire-Time", tokenDto.getAccessTokenExpiresIn().toString());
     }
 
