@@ -7,19 +7,19 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ResponseDto<T> {
 
-    private boolean result;
+    private boolean success;
 
     private T data;
     private String message;
     private Error error;
 
-    public ResponseDto(boolean result, T data) {
-        this.result = result;
+    public ResponseDto(boolean success, T data) {
+        this.success = success;
         this.data = data;
     }
 
-    public ResponseDto(boolean result, T data, Error error) {
-        this.result = result;
+    public ResponseDto(boolean success, T data, Error error) {
+        this.success = success;
         this.data = data;
         this.error = error;
     }
