@@ -160,5 +160,4 @@
 	- 위에서도 설명했듯이 이미지URL에 bucket주소를 제외해야 하므로, substring을 이용하여 폴더경로 전까지 자르고 fileName이라는 변수에 저장하였다. 이 때, Key값대로 값은 잘 저장이 되었으나 이미지를 업로드하지 않을 경우 imgURL이 null인데 null을 substring할 수가 없으니 오류가 생겼다.
 	- 그래서 imgUrl이 null값이면 fileName도 null을 주고, imgUrl이 있을 경우 그 url을 substring해서 key값을 얻을 수 있도록 하였다.
 
-기술매니저님이 코드를 보시고는 다른 방법을 고민해보라고 하였다. 나역시 코드가 지저분하고 불안했던 부분이라 좀 더 공부를 한 후에 수정을 해야할 것 같다.
 
